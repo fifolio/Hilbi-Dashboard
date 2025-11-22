@@ -4,6 +4,7 @@
     "description": "Welcome to your dashboard!"
   },
   "usersList": {
-    "title": "Users List"
+    "title": "Users List",
+    "breadcrumb-route": "/ Users List"
   }
 }
