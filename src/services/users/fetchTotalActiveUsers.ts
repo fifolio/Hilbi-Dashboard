@@ -1,7 +1,7 @@
 export async function fetchTotalActiveUsers() {
   try {
     const res = await fetch(
-      'http://localhost:50000/users?page=1&pageSize=1&status=active'
+      'http://localhost:50000/users?page=1&pageSize=1&status=active',
     )
 
     if (!res.ok) {

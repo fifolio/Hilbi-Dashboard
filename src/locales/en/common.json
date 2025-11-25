@@ -4,7 +4,8 @@
     "description": "Welcome to your dashboard!"
   },
   "usersList": {
-    "title": "Users List",
+    "title": "Users Management",
+    "description": "View and manage all users in your system",
     "breadcrumb-route": "/ Users List"
   }
 }

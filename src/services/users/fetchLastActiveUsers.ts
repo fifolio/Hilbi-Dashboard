@@ -1,7 +1,7 @@
 export async function fetchLastActiveUsers() {
   try {
     const res = await fetch(
-      'http://localhost:50000/users?page=1&pageSize=10&sort=updatedAt_desc'
+      'http://localhost:50000/users?page=1&pageSize=5&sort=updatedAt_desc',
     )
 
     if (!res.ok) {

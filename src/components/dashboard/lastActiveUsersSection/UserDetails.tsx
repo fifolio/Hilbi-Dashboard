@@ -1,19 +1,18 @@
-import { formatDate } from "@/helpers";
-import type { User } from "@/interfaces";
+import type { User } from '@/interfaces'
+import { formatDate } from '@/helpers'
 
 interface UserDetailsProps {
-  data: User;
+  data: User
 }
 
 export default function UserDetails({ data }: UserDetailsProps) {
   return (
     <div className="tw:flex tw:items-center tw:w-full tw:text-black tw:py-3 tw:hover:bg-gray-100 tw:px-3 tw:border-b tw:border-gray-200">
-      
       {/* USER AVATAR */}
-      <div className="tw:bg-[#FF9C6E] tw:text-white tw:rounded-full tw:w-[32px] tw:h-[32px] tw:flex tw:items-center tw:justify-center">
+      <div className="tw:bg-[#FF9C6E] tw:text-white tw:rounded-full tw:w-8 tw:h-8  tw:flex tw:items-center tw:justify-center">
         <span>
-          {data.firstName?.[0]}
-          {data.lastName?.[0]}
+          {data.firstName[0]}
+          {data.lastName[0]}
         </span>
       </div>
 
@@ -30,5 +29,5 @@ export default function UserDetails({ data }: UserDetailsProps) {
         {formatDate(data.updatedAt)}
       </div>
     </div>
-  );
+  )
 }

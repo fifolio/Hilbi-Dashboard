@@ -1,28 +1,38 @@
-import { RightOutlined } from "@ant-design/icons";
-import { Link } from "@tanstack/react-router";
-import UserDetails from "./UserDetails";
-import { useEffect, useState } from "react";
-import { fetchLastActiveUsers } from "@/services";
-import { Spin } from "antd";
+import { RightOutlined } from '@ant-design/icons'
+import { Link } from '@tanstack/react-router'
+import { Spin } from 'antd'
+import { useEffect, useState } from 'react'
+import UserDetails from './UserDetails'
+import { fetchLastActiveUsers } from '@/services'
 
 export default function LastActiveUsersSection() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [lastActiveUsers, setLastActiveUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [lastActiveUsers, setLastActiveUsers] = useState<Array<any>>([])
 
   useEffect(() => {
+    let isMounted = true
+
     const loadUsers = async () => {
       // delay 2 seconds to simulate API latency
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      const users = await fetchLastActiveUsers();
-      setLastActiveUsers(users || []);
-      setLoading(false);
-    };
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      const users = await fetchLastActiveUsers()
 
-    loadUsers();
-  }, []);
+      if (isMounted) {
+        setLastActiveUsers(users || [])
+        setLoading(false)
+      }
+    }
+
+    loadUsers()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
-    <div className="tw:w-full tw:h-[495px] tw:rounded-xl tw:py-3 tw:bg-white tw:border tw:border-gray-200 tw:text-black">
+    <div className="tw:w-full tw:h-[402px] tw:rounded-xl tw:py-3 tw:bg-white tw:border tw:border-gray-200 tw:text-black">
       <div className="tw:px-3 tw:flex tw:justify-between tw:items-center tw:pb-3">
         <h6 className="tw:font-semibold">Last active users</h6>
         <Link
@@ -35,12 +45,12 @@ export default function LastActiveUsersSection() {
 
       <hr className="tw:text-gray-200" />
 
-      <div className="tw:h-[448px] tw:overflow-y-auto">
+      <div className="tw:overflow-y-auto">
         {loading ? (
           <center className="tw:h-full tw:flex tw:items-center tw:justify-center">
             <Spin size="large" />
           </center>
-        ) : lastActiveUsers && lastActiveUsers.length > 0 ? (
+        ) : lastActiveUsers.length > 0 ? (
           lastActiveUsers.map((user) => (
             <UserDetails key={user.id} data={user} />
           ))
@@ -51,5 +61,5 @@ export default function LastActiveUsersSection() {
         )}
       </div>
     </div>
-  );
+  )
 }
